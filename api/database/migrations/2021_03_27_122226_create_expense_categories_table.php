@@ -21,6 +21,10 @@ class CreateExpenseCategoriesTable extends Migration
             $table->boolean('is_system');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
         });
     }
 

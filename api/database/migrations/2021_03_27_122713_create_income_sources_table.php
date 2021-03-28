@@ -17,7 +17,13 @@ class CreateIncomeSourcesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('color');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->boolean('is_system');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
         });
     }
 

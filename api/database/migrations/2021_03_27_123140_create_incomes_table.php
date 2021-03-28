@@ -18,8 +18,8 @@ class CreateIncomesTable extends Migration
             $table->decimal('amount', 15, 2);
             $table->text('description');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('wallet_id');
-            $table->unsignedBigInteger('income_source_id');
+            $table->unsignedBigInteger('wallet_id')->nullable();
+            $table->unsignedBigInteger('income_source_id')->nullable();
             $table->datetime('time_received');
             $table->timestamps();
 
@@ -29,11 +29,13 @@ class CreateIncomesTable extends Migration
 
             $table->foreign('wallet_id')
                 ->references('id')
-                ->on('wallets');
+                ->on('wallets')
+                ->onDelete('set null');
 
             $table->foreign('income_source_id')
                 ->references('id')
-                ->on('income_sources');
+                ->on('income_sources')
+                ->onDelete('set null');
         });
     }
 
