@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('income_sources', [ IncomeSourcesController::class, 'store' ]);
     Route::get('income_sources/{income_source}', [ IncomeSourcesController::class, 'show' ]);
     Route::put('income_sources/{income_source}', [ IncomeSourcesController::class, 'update' ]);
+    Route::delete('income_sources/{income_source}', [ IncomeSourcesController::class, 'destroy' ]);
 });
 
 Route::post('login', LoginController::class);

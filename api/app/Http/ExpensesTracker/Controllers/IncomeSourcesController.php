@@ -10,6 +10,7 @@ use App\Domain\ExpensesTracker\DTO\IncomeSourceData;
 use App\Http\ExpensesTracker\Queries\IncomeSourcesQuery;
 use App\Domain\ExpensesTracker\Actions\CreateIncomeSourceAction;
 use App\Domain\ExpensesTracker\Actions\UpdateIncomeSourceAction;
+use App\Domain\ExpensesTracker\Actions\DeleteIncomeSourceAction;
 use App\Http\ExpensesTracker\Requests\IncomeSources\CreateUpdateRequest;
 use App\Http\ExpensesTracker\Requests\IncomeSources\IncomeSourceShowRequest;
 
@@ -42,5 +43,15 @@ class IncomeSourcesController extends Controller
         $action($income_source, IncomeSourceData::fromRequest($request));
 
         return response()->json($income_source, JsonResponse::HTTP_OK);
+    }
+
+    public function destroy(
+        IncomeSource $income_source,
+        IncomeSourceShowRequest $request,
+        DeleteIncomeSourceAction $action
+    ): JsonResponse {
+        $action($income_source);
+
+        return response()->json([], JsonResponse::HTTP_NO_CONTENT);
     }
 }
