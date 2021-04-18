@@ -9,6 +9,7 @@ use App\Domain\ExpensesTracker\Models\Wallet;
 use App\Domain\ExpensesTracker\DTO\WalletData;
 use App\Http\ExpensesTracker\Queries\WalletsQuery;
 use App\Domain\ExpensesTracker\Actions\CreateWalletAction;
+use App\Domain\ExpensesTracker\Actions\DeleteWalletAction;
 use App\Http\ExpensesTracker\Requests\Wallets\WalletShowRequest;
 use App\Http\ExpensesTracker\Requests\Wallets\CreateUpdateRequest;
 
@@ -31,5 +32,12 @@ class WalletsController extends Controller
     public function show(Wallet $wallet, WalletShowRequest $request)
     {
         return response()->json($wallet, JsonResponse::HTTP_OK);
+    }
+
+    public function destroy(Wallet $wallet, WalletShowRequest $request, DeleteWalletAction $action)
+    {
+        $action($wallet);
+
+        return response()->json([], JsonResponse::HTTP_NO_CONTENT);
     }
 }
