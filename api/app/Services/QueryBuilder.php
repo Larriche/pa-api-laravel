@@ -89,6 +89,11 @@ class QueryBuilder
             }
         }
 
+        // Search filter
+        if (isset($data['keyword']) && $data['keyword']) {
+            $query = $this->search($query, $data['keyword']);
+        }
+
         $query = $this->applyFilters($query, $data);
 
         if (isset($params['order'])) {
@@ -198,11 +203,6 @@ class QueryBuilder
      */
     public function applyFilters($query, $data)
     {
-        // Add search filter if keyword is present
-        if (isset($data['keyword']) && $data['keyword']) {
-            $query = $this->search($query, $data['keyword']);
-        }
-
         return $query;
     }
 
