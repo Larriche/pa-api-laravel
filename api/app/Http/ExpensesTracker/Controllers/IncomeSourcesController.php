@@ -10,6 +10,7 @@ use App\Domain\ExpensesTracker\DTO\IncomeSourceData;
 use App\Http\ExpensesTracker\Queries\IncomeSourcesQuery;
 use App\Domain\ExpensesTracker\Actions\CreateIncomeSourceAction;
 use App\Http\ExpensesTracker\Requests\IncomeSources\CreateUpdateRequest;
+use App\Http\ExpensesTracker\Requests\IncomeSources\IncomeSourceShowRequest;
 
 class IncomeSourcesController extends Controller
 {
@@ -25,5 +26,10 @@ class IncomeSourcesController extends Controller
         $source = $action(IncomeSourceData::fromRequest($request));
 
         return response()->json($source, JsonResponse::HTTP_CREATED);
+    }
+
+    public function show(IncomeSource $income_source, IncomeSourceShowRequest $request): JsonResponse
+    {
+        return response()->json($income_source, JsonResponse::HTTP_OK);
     }
 }
