@@ -5,9 +5,11 @@ namespace App\Http\ExpensesTracker\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Domain\ExpensesTracker\Models\Wallet;
 use App\Domain\ExpensesTracker\DTO\WalletData;
 use App\Http\ExpensesTracker\Queries\WalletsQuery;
 use App\Domain\ExpensesTracker\Actions\CreateWalletAction;
+use App\Http\ExpensesTracker\Requests\Wallets\WalletShowRequest;
 use App\Http\ExpensesTracker\Requests\Wallets\CreateUpdateRequest;
 
 class WalletsController extends Controller
@@ -24,5 +26,10 @@ class WalletsController extends Controller
         $wallet = $action(WalletData::fromRequest($request));
 
         return response()->json($wallet, JsonResponse::HTTP_CREATED);
+    }
+
+    public function show(Wallet $wallet, WalletShowRequest $request)
+    {
+        return response()->json($wallet, JsonResponse::HTTP_OK);
     }
 }

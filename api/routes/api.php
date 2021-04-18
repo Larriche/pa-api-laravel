@@ -24,6 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('wallets', [ WalletsController::class, 'index' ]);
     Route::post('wallets', [ WalletsController::class, 'store' ]);
+    Route::get('wallets/{wallet}', [ WalletsController::class, 'show' ]);
 });
 
 Route::post('login', LoginController::class);
