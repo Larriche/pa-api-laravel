@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\SignUpController;
 use App\Http\ExpensesTracker\Controllers\WalletsController;
+use App\Http\ExpensesTracker\Controllers\IncomeSourcesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +23,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
+    // Wallets
     Route::get('wallets', [ WalletsController::class, 'index' ]);
     Route::post('wallets', [ WalletsController::class, 'store' ]);
     Route::get('wallets/{wallet}', [ WalletsController::class, 'show' ]);
     Route::put('wallets/{wallet}', [ WalletsController::class, 'update' ]);
     Route::delete('wallets/{wallet}', [ WalletsController::class, 'destroy' ]);
+
+    // Income sources
+    Route::get('income_sources', [ IncomeSourcesController::class, 'index' ]);
+    Route::post('income_sources', [ IncomeSourcesController::class, 'store' ]);
 });
 
 Route::post('login', LoginController::class);
