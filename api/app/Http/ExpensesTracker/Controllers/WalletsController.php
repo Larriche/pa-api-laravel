@@ -9,13 +9,14 @@ use App\Domain\ExpensesTracker\Models\Wallet;
 use App\Domain\ExpensesTracker\DTO\WalletData;
 use App\Http\ExpensesTracker\Queries\WalletsQuery;
 use App\Domain\ExpensesTracker\Actions\CreateWalletAction;
+use App\Domain\ExpensesTracker\Actions\UpdateWalletAction;
 use App\Domain\ExpensesTracker\Actions\DeleteWalletAction;
 use App\Http\ExpensesTracker\Requests\Wallets\WalletShowRequest;
 use App\Http\ExpensesTracker\Requests\Wallets\CreateUpdateRequest;
 
 class WalletsController extends Controller
 {
-    public function index(Request $request, WalletsQuery $query)
+    public function index(Request $request, WalletsQuery $query): JsonResponse
     {
         $wallets = $query->execute($request);
 
@@ -29,12 +30,19 @@ class WalletsController extends Controller
         return response()->json($wallet, JsonResponse::HTTP_CREATED);
     }
 
-    public function show(Wallet $wallet, WalletShowRequest $request)
+    public function show(Wallet $wallet, WalletShowRequest $request): JsonResponse
     {
         return response()->json($wallet, JsonResponse::HTTP_OK);
     }
 
-    public function destroy(Wallet $wallet, WalletShowRequest $request, DeleteWalletAction $action)
+    public function update(Wallet $wallet, CreateUpdateRequest $request, UpdateWalletAction $action): JsonResponse
+    {
+        $action($wallet, WalletData::fromRequest($request));
+
+        return response()->json($wallet, JsonResponse::HTTP_OK);
+    }
+
+    public function destroy(Wallet $wallet, WalletShowRequest $request, DeleteWalletAction $action): JsonResponse
     {
         $action($wallet);
 

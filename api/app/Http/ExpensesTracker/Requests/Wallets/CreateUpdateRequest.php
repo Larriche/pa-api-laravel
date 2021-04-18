@@ -14,6 +14,10 @@ class CreateUpdateRequest extends ApiRequest
      */
     public function authorize()
     {
+        if ($this->getMethod() == 'PUT') {
+            return Auth::id() && $this->wallet->user_id == Auth::id();
+        }
+
         return true;
     }
 
@@ -31,9 +35,9 @@ class CreateUpdateRequest extends ApiRequest
 
         if ($this->getMethod() == 'PUT') {
             $rules = [
-                'name' => 'required|unique:wallets,name,' . $this->route('wallet_id')
+                'name' => 'required|unique:wallets,name,' . $this->wallet->id
                     . ',id,user_id,' . Auth::user()->id,
-                'color' => 'required|unique:wallets,color,' . $this->route('wallet_id')
+                'color' => 'required|unique:wallets,color,' . $this->wallet->id
                     . ',id,user_id,' . Auth::user()->id
             ];
         }
