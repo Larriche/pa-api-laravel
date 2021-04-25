@@ -31,18 +31,18 @@ class WalletData extends DataTransferObject
     public $user_id;
 
      /**
-     * Create a new application DTO based on data given
+     * Create a new wallet DTO based on data given
      *
      * @param array $data Data for creating DTO
      * @return \App\Domain\ExpensesTracker\DTO\WalletData
      */
-    public static function new($data): ApplicationData
+    public static function new($data): WalletData
     {
         return new self($data);
     }
 
     /**
-     * Pull data for creating or updating an application from a request body
+     * Pull data for creating or updating a wallet from a request body
      *
      * @param \App\Http\ExpensesTracker\Requests\Wallets\CreateUpdateRequest $request The request
      */
