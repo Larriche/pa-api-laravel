@@ -4,27 +4,27 @@ namespace App\Domain\ExpensesTracker\DTO;
 
 use Auth;
 use Spatie\DataTransferObject\DataTransferObject;
-use App\Domain\ExpensesTracker\Models\IncomeSource;
-use App\Http\ExpensesTracker\Requests\IncomeSources\CreateUpdateRequest;
+use App\Domain\ExpensesTracker\Models\ExpenseCategory;
+use App\Http\ExpensesTracker\Requests\ExpenseCategories\CreateUpdateRequest;
 
-class IncomeSourceData extends DataTransferObject
+class ExpenseCategoryData extends DataTransferObject
 {
     /**
-     * Name of income source
+     * Name of expense category
      *
      * @var string
      */
     public $name;
 
     /**
-     * Hex code of color to identify income source by
+     * Hex code of color to identify expense category by
      *
      * @var string
      */
     public $color;
 
     /**
-     * Id of user who created income source
+     * Id of user who created expense category
      *
      * @var int
      */
@@ -34,17 +34,17 @@ class IncomeSourceData extends DataTransferObject
      * Create a new application DTO based on data given
      *
      * @param array $data Data for creating DTO
-     * @return \App\Domain\ExpensesTracker\DTO\IncomeSourceData
+     * @return \App\Domain\ExpensesTracker\DTO\ExpenseCategoryData
      */
-    public static function new($data): IncomeSourceData
+    public static function new($data): ExpenseCategoryData
     {
         return new self($data);
     }
 
     /**
-     * Pull data for creating or updating resouce from a request body
+     * Pull data for creating or updating resource from a request body
      *
-     * @param \App\Http\ExpensesTracker\Requests\IncomeSources\CreateUpdateRequest $request The request
+     * @param \App\Http\ExpensesTracker\Requests\ExpenseCategories\CreateUpdateRequest $request The request
      */
     public static function fromRequest(CreateUpdateRequest $request)
     {
